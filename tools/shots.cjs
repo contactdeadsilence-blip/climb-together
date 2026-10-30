@@ -14,4 +14,8 @@ await A.evaluate(()=>{__ct.release();__ct.tp(0,17,13,false);__ct.look(Math.PI-.4
 bp=[2,59,40];bg=0;await sl(300);await A.evaluate(()=>{__ct.setCp(3);__ct.tp(-3,60,40,false);__ct.look(Math.PI+.3,.35)});await sl(1500);await A.screenshot({path:OUT+'5-frost.png'});
 bp=[1.5,83,48];await sl(300);await A.evaluate(()=>{__ct.setCp(3);__ct.tp(0,83,48.5,false)});await sl(2500);console.log(await A.evaluate(()=>{const p=__ct.game.players[__ct.game.myIdx];return JSON.stringify({cp:p.cp,pos:p.pos,won:__ct.game.won,cls:document.getElementById('win').className})}));await sl(2500);await A.screenshot({path:OUT+'6-summit.png'});
 console.log('fps-ish',await A.evaluate(()=>new Promise(r=>{let n=0,t=performance.now();const f=()=>{n++;performance.now()-t<2000?requestAnimationFrame(f):r(n/2)};f()})));
+const S=await mk();await sl(3200);console.log('route',await S.evaluate(()=>JSON.stringify(__ct.route())));await S.click('[data-a=solo]');await sl(800);
+await S.evaluate(()=>{__ct.tp(4,22,21.5,false);__ct.look(Math.PI+.5,.15)});await sl(2000);await S.screenshot({path:OUT+'7-v2.png'});
+await S.keyboard.press('Escape');await sl(300);console.log('paused',await S.evaluate(()=>__ct.pause()));await S.click('[data-a=resume]');
+await S.evaluate(()=>{__ct.setCp(4);__ct.tp(0,83,48.5,false)});await sl(1500);console.log('solo won',await S.evaluate(()=>__ct.game.won));
 await b.close();srv.kill();process.exit(0);})();
