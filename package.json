@@ -1,0 +1,1 @@
+{"name":"climb-together","version":"0.1.0","private":true,"type":"module","scripts":{"build":"vite build","dev":"vite","start":"node server/index.js"},"engines":{"node":">=18"},"dependencies":{"express":"^4.19.2","three":"^0.165.0","vite":"^5.2.0","ws":"^8.17.0"},"devDependencies":{"puppeteer-core":"^22.10.0"}}

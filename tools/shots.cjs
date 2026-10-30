@@ -1,0 +1,17 @@
+const pp=require('puppeteer-core'),{spawn}=require('child_process');const OUT='/workspace/ui-shots/climb/';const sl=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{const srv=spawn('node',['server/index.js'],{env:{...process.env,PORT:3100},stdio:'inherit'});await sl(800);
+const b=await pp.launch({executablePath:'/usr/bin/google-chrome',headless:'new',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader','--window-size=1280,720']});
+const mk=async()=>{const p=await b.newPage();await p.setViewport({width:1280,height:720});p.on('pageerror',e=>console.log('ERR',e.message));p.on('console',m=>m.type()=='error'&&console.log('CON',m.text()));await p.goto('http://localhost:3100/',{waitUntil:'networkidle0'});return p};
+const A=await mk();await sl(1200);await A.screenshot({path:OUT+'0-splash.png'});await sl(2600);await A.screenshot({path:OUT+'1-title.png'});
+await A.click('[data-a=host]');await sl(800);const code=await A.$eval('#lcode',e=>e.textContent);
+const WS=require('ws');const B=new WS('ws://localhost:3100/ws');let bp=[1.6,6,9.55],bg=3;B.on('open',()=>B.send(JSON.stringify({t:'join',code,name:'PATER'})));
+setInterval(()=>B.readyState==1&&B.send(JSON.stringify({t:'s',p:bp,v:[0,0,0],r:0,g:bg})),66);await sl(700);
+await A.screenshot({path:OUT+'2-lobby.png'});await A.click('[data-a=start]');await sl(1500);
+await A.evaluate(()=>{__ct.tp(-1,9.5,9.5,true);__ct.look(Math.PI+.35,.05)});
+await sl(2500);await A.evaluate(()=>{__ct.tp(-1,9.5,9.5,true)});await sl(900);
+await A.screenshot({path:OUT+'3-gameplay-roped.png'});
+await A.evaluate(()=>{__ct.release();__ct.tp(0,17,13,false);__ct.look(Math.PI-.4,.3)});await sl(1500);await A.screenshot({path:OUT+'4-meadow-ledge.png'});
+bp=[2,59,40];bg=0;await sl(300);await A.evaluate(()=>{__ct.setCp(3);__ct.tp(-3,60,40,false);__ct.look(Math.PI+.3,.35)});await sl(1500);await A.screenshot({path:OUT+'5-frost.png'});
+bp=[1.5,83,48];await sl(300);await A.evaluate(()=>{__ct.setCp(3);__ct.tp(0,83,48.5,false)});await sl(2500);console.log(await A.evaluate(()=>{const p=__ct.game.players[__ct.game.myIdx];return JSON.stringify({cp:p.cp,pos:p.pos,won:__ct.game.won,cls:document.getElementById('win').className})}));await sl(2500);await A.screenshot({path:OUT+'6-summit.png'});
+console.log('fps-ish',await A.evaluate(()=>new Promise(r=>{let n=0,t=performance.now();const f=()=>{n++;performance.now()-t<2000?requestAnimationFrame(f):r(n/2)};f()})));
+await b.close();srv.kill();process.exit(0);})();

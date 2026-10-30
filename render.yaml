@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: climb-together
+    runtime: node
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
