@@ -18,4 +18,8 @@ const S=await mk();await sl(3200);console.log('route',await S.evaluate(()=>JSON.
 await S.evaluate(()=>{__ct.tp(4,22,21.5,false);__ct.look(Math.PI+.5,.15)});await sl(2000);await S.screenshot({path:OUT+'7-v2.png'});
 await S.keyboard.press('Escape');await sl(300);console.log('paused',await S.evaluate(()=>__ct.pause()));await S.click('[data-a=resume]');
 await S.evaluate(()=>{__ct.setCp(4);__ct.tp(0,83,48.5,false)});await sl(1500);console.log('solo won',await S.evaluate(()=>__ct.game.won));
+const D=await mk();await sl(3200);await D.click('[data-a=local]');await sl(300);await D.keyboard.press('Enter');await D.evaluate(()=>__ct.claimPad(0));await sl(300);
+await D.screenshot({path:OUT+'8-localduo-join.png'});await D.click('[data-a=lstart]');await sl(800);
+await D.evaluate(()=>{const g=__ct.game;g.players[0].pos.set(-1.5,9.5,9.55);g.players[1].pos.set(1.8,7,9.55);g.players.forEach(p=>{p.prev.copy(p.pos);p.grip=true});__ct.look(Math.PI-.15,.05)});await sl(1500);
+await D.screenshot({path:OUT+'8-localduo.png'});console.log('localduo',await D.evaluate(()=>JSON.stringify({n:__ct.game.players.filter(p=>p.local).length,src:__ct.game.localSrc})));
 await b.close();srv.kill();process.exit(0);})();

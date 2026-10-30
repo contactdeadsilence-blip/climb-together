@@ -39,19 +39,22 @@ input{font:900 30px Nunito;text-align:center;width:220px;padding:8px;border-radi
 #pause{z-index:25;background:rgba(10,15,35,.6);backdrop-filter:blur(4px)}
 #osk{display:grid;grid-template-columns:repeat(9,44px);gap:6px;justify-content:center;margin:8px auto}.key{font:22px 'Lilita One';height:44px;border:0;border-radius:10px;background:#fff2;color:#fff;cursor:pointer}.key:hover{background:#fff4}.key.w{grid-column:span 2;background:#ff9f2e55}
 input.tgt{box-shadow:0 0 0 4px #ffcf3a}
+#stam2{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);width:300px;height:18px;border-radius:10px;background:rgba(0,0,0,.4);border:3px solid #3fa9f5;overflow:hidden}#stamf2{height:100%;width:100%}
+#lslots{display:flex;gap:16px;justify-content:center;margin:16px}.lslot{border:4px solid;border-radius:16px;padding:16px 20px;min-width:220px;font-weight:900;background:#0004}.lslot b{font-family:'Lilita One';font-size:28px}
 </style></head><body>
 <div id="splash" class="scr on"><img src="/logo.svg" alt="DEAD SILENCE Studios"><p>DEAD SILENCE STUDIOS PRESENTS</p></div>
 <div id="menu" class="scr">
  <div id="m-main" class="col"><h1>CLIMB<br>TOGETHER</h1><div class="sub">ROPED UP · 1–4 PLAYERS</div>
- <button class="btn" data-a="solo">Play Solo</button><button class="btn" data-a="host">Host Online</button><button class="btn b" data-a="join">Join Code</button><button class="btn b" data-a="set">Settings</button></div>
+ <button class="btn" data-a="solo">Play Solo</button><button class="btn" data-a="host">Host Online</button><button class="btn" data-a="local">Local Duo</button><button class="btn b" data-a="join">Join Code</button><button class="btn b" data-a="set">Settings</button></div>
  <div id="m-join" class="panel" style="display:none"><h2>ENTER ROOM CODE</h2><input id="code" maxlength="4"><br><input id="nm" placeholder="NAME" maxlength="10" style="font-size:20px"><br><div id="osk"></div><button class="btn" data-a="dojoin">Join</button><button class="btn b" data-a="back">Back</button><p id="jerr" style="color:#ff8a8a"></p></div>
  <div id="m-lobby" class="panel" style="display:none"><div>ROOM CODE</div><div class="code" id="lcode">----</div><div id="lpl"></div><p id="lmode"></p><button class="btn" data-a="start" id="bstart">Start Climb</button><button class="btn b" data-a="leave">Leave</button></div>
+ <div id="m-local" class="panel" style="display:none"><h2>LOCAL DUO · ONE SCREEN</h2><p>Each climber presses <b>A</b> on their controller, or <b>ENTER</b> for keyboard + mouse</p><div id="lslots"></div><button class="btn" data-a="lstart" id="blstart">Start Climb</button><button class="btn b" data-a="back">Back</button></div>
  <div id="m-set" class="panel" style="display:none"><h2>SETTINGS</h2><p>Mouse sensitivity <input type="range" id="sens" min="1" max="10" value="5" style="width:180px"></p>
  <p>Quality <select id="qual" style="font:900 18px Nunito"><option value="2">High</option><option value="1">Medium</option><option value="0">Low</option></select></p><p>Volume <input type="range" id="vol" min="0" max="10" value="7" style="width:180px"></p><button class="btn b" data-a="back">Back</button></div>
  <div id="brand"><img src="/logo.svg">DEAD SILENCE STUDIOS</div>
 </div>
 <div id="hud"><div id="tm">0:00</div><div id="alt">0m<small>ALTITUDE</small></div><div id="altbar"></div><div id="altdots"></div><div id="msg"></div><div id="charge"><div id="chargef"></div></div>
-<div id="stam"><div id="stamf"></div></div>
+<div id="stam"><div id="stamf"></div></div><div id="stam2" style="display:none"><div id="stamf2"></div></div>
 <div id="help">WASD move · Mouse look · <b>Hold LMB/RMB</b> grab (left/right hand) · SPACE jump — on a wall: tap/hold to LEAP · 1-4 emotes<br>Pad: L-stick move · R-stick look · LT/RT grab · A jump/leap · START pause<br>Only the colored holds are grabbable · brown holds crumble · icy holds drain stamina · catch at the top of a leap</div></div>
 <div id="win" class="scr"><h1>SUMMIT!</h1><div class="sub" id="wtime"></div><button class="btn" data-a="again">Climb Again</button><button class="btn b" data-a="tomenu">Main Menu</button></div>
 <div id="pause" class="scr"><h1>PAUSED</h1><div class="sub">START / ESC TO RESUME</div><button class="btn" data-a="resume">Resume</button><button class="btn b" data-a="pset">Settings</button><button class="btn b" data-a="tomenu">Quit to Menu</button></div>
